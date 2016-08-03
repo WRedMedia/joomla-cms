@@ -68,6 +68,50 @@ class JFilterOutput extends OutputFilter
 
 		// Transliterate on the language requested (fallback to current language if not specified)
 		$lang = $language == '' || $language == '*' ? JFactory::getLanguage() : JLanguage::getInstance($language);
+
+		//hard fix Armenian transliterate
+		$replace = array(
+		    "Ա"   => "A", "ա"    => "a",
+		    "Բ"   => "B", "բ"    => "b",
+		    "Գ"   => "G", "գ"    => "g",
+		    "Դ"   => "D", "դ"    => "d",
+		    "Ե"   => "E", "ե"    => "e",
+		    "Զ"   => "Z", "զ"    => "z",
+		    "Է"   => "E", "է"    => "e",
+		    "Ը"   => "Y", "ը"    => "y",
+		    "Թ"   => "T", "թ"    => "t",
+		    "Ժ"   => "Zh", "ժ"   => "zh",
+		    "Ի"   => "I", "ի"    => "i",
+		    "Լ"   => "L", "լ"    => "l",
+		    "Խ"   => "Kh", "խ"   => "kh",
+		    "Ծ"   => "Ts", "ծ"   => "ts",
+		    "Կ"   => "K", "կ"    => "k",
+		    "Հ"   => "H", "հ"    => "h",
+		    "Ձ"   => "Dz", "ձ"   => "dz",
+		    "Ղ"   => "X", "ղ"    => "x",
+		    "Ճ"   => "Ch", "ճ"   => "ch",
+		    "Մ"   => "M", "մ"    => "m",
+		    "Յ"   => "Y", "յ"    => "y",
+		    "Ն"   => "N", "ն"    => "n",
+		    "Շ"   => "Sh", "շ"   => "sh",
+		    "Ո"   => "O", "ո"    => "o",
+		    "Չ"   => "Ch", "չ"   => "ch",
+		    "Պ"   => "P", "պ"    => "p",
+		    "Ջ"   => "J", "ջ"    => "j",
+		    "Ռ"   => "R", "ռ"    => "r",
+		    "Ս"   => "S", "ս"    => "s",
+		    "Վ"   => "V", "վ"    => "v",
+		    "Տ"   => "T", "տ"    => "t",
+		    "Ր"   => "R", "ր"    => "r",
+		    "Ց"   => "Ts", "ց"   => "ts",
+		    "ՈՒ" => "U", "ու"  => "u",
+		    "Փ"   => "P", "փ"    => "p",
+		    "Ք"   => "Q", "ք"    => "q",
+		    "Օ"   => "O", "օ"    => "o",
+		    "Ֆ"   => "F", "ֆ"    => "f",
+		    "և"   => "ev",
+		);
+		$str = iconv("UTF-8", "UTF-8//IGNORE", strtr($str, $replace));
 		$str = $lang->transliterate($str);
 
 		// Trim white spaces at beginning and end of alias and make lowercase
